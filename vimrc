@@ -40,11 +40,16 @@ call vundle#begin()
 	Plugin 'rafi/awesome-vim-colorschemes'
 	Plugin 'vim-python/python-syntax'
 	"Plugin 'python-mode/python-mode'
-	Plugin 'tpope/vim-dadbod'
-	Plugin 'tpope/vim-fugitive'
-	Plugin 'dart-lang/dart-vim-plugin'
+	"Plugin 'tpope/vim-dadbod'
+	"Plugin 'tpope/vim-fugitive'
+	"Plugin 'dart-lang/dart-vim-plugin'
 	"Plugin 'ap/vim-css-color'
 	"Plugin 'dense-analysis/ale'
+	"Plugin 'prabirshrestha/vim-lsp'
+	"Plugin 'mattn/vim-lsp-settings'
+	"Plugin 'prabirshrestha/asyncomplete.vim'
+	"Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+	"Plugin  'cheap-glitch/vim-v'
 	let g:UltiSnipsExpandTrigger="<c-j>"
 	let g:UltiSnipsJumpForwardTrigger="<c-b>"
 	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -56,4 +61,3 @@ call vundle#begin()
 	imap <C-l> <Plug>(coc-snippets-expand)
 	"au BufWrite *.py :Autoformat
 call vundle#end()
-
