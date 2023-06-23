@@ -27,7 +27,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
-	Plugin 'ycm-core/YouCompleteMe'
+	"Plugin 'ycm-core/YouCompleteMe'
 	Plugin 'SirVer/ultisnips'
 	Plugin 'honza/vim-snippets'
 	Plugin 'neoclide/coc.nvim'
@@ -38,7 +38,7 @@ call vundle#begin()
 	Plugin 'fisadev/vim-isort'
 	"Plugin 'ervandew/supertab'
 	Plugin 'rafi/awesome-vim-colorschemes'
-	Plugin 'vim-python/python-syntax'
+	"Plugin 'vim-python/python-syntax'
 	"Plugin 'python-mode/python-mode'
 	"Plugin 'tpope/vim-dadbod'
 	"Plugin 'tpope/vim-fugitive'
@@ -58,6 +58,26 @@ call vundle#begin()
 	let g:autoformat_retab = 1
 	let g:python_highlight_all = 1
 	let g:ale_completion_enabled = 1
-	imap <C-l> <Plug>(coc-snippets-expand)
+	"imap <C-l> <Plug>(coc-snippets-expand)
+	autocmd CursorHold * silent call CocActionAsync('highlight')
 	"au BufWrite *.py :Autoformat
 call vundle#end()
+
+
+"inoremap <silent><expr> <TAB>
+"      \ coc#pum#visible() ? coc#pum#next(1) :
+"      \ CheckBackspace() ? "\<Tab>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
