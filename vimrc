@@ -16,12 +16,27 @@ set linebreak
 set display+=lastline
 set cursorline
 function! Exec()
+	let w = win_getid()
 	:only
+	:w
 	:botright term go run %
 	:res -10
+	call win_gotoid(w)
 endfunction
 
-au BufWrite *.go call Exec()
+function! RunPython()
+	let w = win_getid()
+	:only
+	:w
+	:botright term python %
+	:res -10
+	call win_gotoid(w)
+endfunction
+
+
+autocmd FileType python nnoremap <buffer> & :call RunPython() <CR>
+autocmd FileType go  nnoremap <buffer> & :call Exec() <CR>
+
 
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -35,10 +50,19 @@ call vundle#begin()
 	Plugin 'jiangmiao/auto-pairs'
 	Plugin  'tpope/vim-unimpaired'
 	Plugin 'vim-autoformat/vim-autoformat'
-	Plugin 'fisadev/vim-isort'
+	"Plugin 'fisadev/vim-isort'
 	"Plugin 'ervandew/supertab'
+	Plugin 'mattn/emmet-vim'
 	Plugin 'rafi/awesome-vim-colorschemes'
-	"Plugin 'vim-python/python-syntax'
+	Plugin 'vim-python/python-syntax'
+	Plugin 'fatih/vim-go'
+	Plugin 'maxmellon/vim-jsx-pretty'
+	Plugin 'mlaursen/vim-react-snippets'
+	Plugin 'natebosch/vim-lsc'
+	Plugin 'nateboshch/vim-lsc-dart'
+
+	"Plugin 'Exafunction/codeium.vim'
+	"Plugin 'kurkale6ka/vim-chess'
 	"Plugin 'python-mode/python-mode'
 	"Plugin 'tpope/vim-dadbod'
 	"Plugin 'tpope/vim-fugitive'
@@ -63,12 +87,19 @@ call vundle#begin()
 	"au BufWrite *.py :Autoformat
 call vundle#end()
 
+"colorscheme sonokai
+"colorscheme gruvbox
+"colorscheme OceanicNext
+"colorscheme habamax
+"colorscheme happy_hacking
+"colorscheme materialbox
+"colorscheme minimalist 
 
-"inoremap <silent><expr> <TAB>
-"      \ coc#pum#visible() ? coc#pum#next(1) :
-"      \ CheckBackspace() ? "\<Tab>" :
-"      \ coc#refresh()
-"inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
@@ -77,7 +108,7 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 
 
-function! CheckBackspace() abort
+function! CheckBackSpace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
