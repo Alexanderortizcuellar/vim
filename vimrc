@@ -59,7 +59,7 @@ call vundle#begin()
 	Plugin 'maxmellon/vim-jsx-pretty'
 	Plugin 'mlaursen/vim-react-snippets'
 	Plugin 'natebosch/vim-lsc'
-	Plugin 'nateboshch/vim-lsc-dart'
+	Plugin 'natebosch/vim-lsc-dart'
 
 	"Plugin 'Exafunction/codeium.vim'
 	"Plugin 'kurkale6ka/vim-chess'
