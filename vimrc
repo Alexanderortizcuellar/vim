@@ -15,6 +15,9 @@ set laststatus=2
 set linebreak
 set display+=lastline
 set cursorline
+filetype plugin indent on
+let mapleader = ","
+set notimeout
 function! Exec()
 	let w = win_getid()
 	:only
@@ -50,6 +53,7 @@ call vundle#begin()
 	Plugin 'jiangmiao/auto-pairs'
 	Plugin  'tpope/vim-unimpaired'
 	Plugin 'vim-autoformat/vim-autoformat'
+	Plugin 'phpactor/phpactor'
 	"Plugin 'fisadev/vim-isort'
 	"Plugin 'ervandew/supertab'
 	Plugin 'mattn/emmet-vim'
@@ -58,22 +62,36 @@ call vundle#begin()
 	Plugin 'fatih/vim-go'
 	Plugin 'maxmellon/vim-jsx-pretty'
 	Plugin 'mlaursen/vim-react-snippets'
-	Plugin 'natebosch/vim-lsc'
-	Plugin 'natebosch/vim-lsc-dart'
-
+	"Plugin 'natebosch/vim-lsc'
+	Plugin 'bfrg/vim-cpp-modern'
+	"Plugin 'natebosch/vim-lsc-dart'
+	Plugin 'sillybun/vim-repl'
 	"Plugin 'Exafunction/codeium.vim'
 	"Plugin 'kurkale6ka/vim-chess'
 	"Plugin 'python-mode/python-mode'
 	"Plugin 'tpope/vim-dadbod'
 	"Plugin 'tpope/vim-fugitive'
-	"Plugin 'dart-lang/dart-vim-plugin'
+	Plugin 'dart-lang/dart-vim-plugin'
+	Plugin 'pangloss/vim-javascript'
+	Plugin 'uiiaoo/java-syntax.vim'
 	"Plugin 'ap/vim-css-color'
 	"Plugin 'dense-analysis/ale'
 	"Plugin 'prabirshrestha/vim-lsp'
 	"Plugin 'mattn/vim-lsp-settings'
 	"Plugin 'prabirshrestha/asyncomplete.vim'
 	"Plugin 'prabirshrestha/asyncomplete-lsp.vim'
-	"Plugin  'cheap-glitch/vim-v'
+	Plugin 'zakuro9715/vim-vtools'
+	Plugin 'zah/nim.vim'
+	let g:go_highlight_function_calls = 1
+	let g:go_highlight_operators = 1
+	let g:go_highlight_functions = 1
+	let g:go_highlight_function_parameters = 1
+	let g:go_highlight_function_calls = 1
+	let g:go_highlight_types = 1
+	let g:go_highlight_fields = 0
+	let g:go_highlight_variable_declarations = 1
+	let g:go_highlight_variable_assignments = 1
+	let g:go_highlight_extra_types = 1
 	let g:UltiSnipsExpandTrigger="<c-j>"
 	let g:UltiSnipsJumpForwardTrigger="<c-b>"
 	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -82,12 +100,15 @@ call vundle#begin()
 	let g:autoformat_retab = 1
 	let g:python_highlight_all = 1
 	let g:ale_completion_enabled = 1
+	let g:repl_program = {
+	\    'python':'ipython',
+	\}
 	"imap <C-l> <Plug>(coc-snippets-expand)
 	autocmd CursorHold * silent call CocActionAsync('highlight')
 	"au BufWrite *.py :Autoformat
 call vundle#end()
 
-"colorscheme sonokai
+colorscheme sonokai
 "colorscheme gruvbox
 "colorscheme OceanicNext
 "colorscheme habamax
