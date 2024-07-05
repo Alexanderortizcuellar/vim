@@ -2,7 +2,7 @@ set nocompatible
 set number
 colorscheme retrobox
 filetype off
-set foldmethod=indent
+"set foldmethod=indent
 autocmd BufRead * normal zR
 "au BufWrite *.py :Autoformat
 "au BufWrite *.py :Isort
@@ -13,33 +13,13 @@ set hlsearch
 set showcmd
 set laststatus=2
 set linebreak
+set wrap!
 set display+=lastline
 set cursorline
 filetype plugin indent on
-let mapleader = ","
+au BufRead *.v set filetype=vlang
+let mapleader = " "
 set notimeout
-function! Exec()
-	let w = win_getid()
-	:only
-	:w
-	:botright term go run %
-	:res -10
-	call win_gotoid(w)
-endfunction
-
-function! RunPython()
-	let w = win_getid()
-	:only
-	:w
-	:botright term python %
-	:res -10
-	call win_gotoid(w)
-endfunction
-
-
-autocmd FileType python nnoremap <buffer> & :call RunPython() <CR>
-autocmd FileType go  nnoremap <buffer> & :call Exec() <CR>
-
 
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -48,12 +28,14 @@ call vundle#begin()
 	"Plugin 'ycm-core/YouCompleteMe'
 	Plugin 'SirVer/ultisnips'
 	Plugin 'honza/vim-snippets'
+	Plugin 'rafamadriz/friendly-snippets'
+	Plugin 'tpope/vim-commentary'
 	Plugin 'neoclide/coc.nvim'
 	Plugin 'preservim/nerdtree'
 	Plugin 'jiangmiao/auto-pairs'
 	Plugin  'tpope/vim-unimpaired'
 	Plugin 'vim-autoformat/vim-autoformat'
-	Plugin 'phpactor/phpactor'
+	"Plugin 'phpactor/phpactor'
 	"Plugin 'fisadev/vim-isort'
 	"Plugin 'ervandew/supertab'
 	Plugin 'mattn/emmet-vim'
@@ -65,7 +47,7 @@ call vundle#begin()
 	"Plugin 'natebosch/vim-lsc'
 	Plugin 'bfrg/vim-cpp-modern'
 	"Plugin 'natebosch/vim-lsc-dart'
-	Plugin 'sillybun/vim-repl'
+	"Plugin 'sillybun/vim-repl'
 	"Plugin 'Exafunction/codeium.vim'
 	"Plugin 'kurkale6ka/vim-chess'
 	"Plugin 'python-mode/python-mode'
@@ -120,13 +102,18 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-
+" nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
+" nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
+" nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+nmap <leader>f :call CocActionAsync('format')<CR>
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ CheckBackSpace() ? "\<TAB>" :
       \ coc#refresh()
+
 
 
 function! CheckBackSpace() abort
